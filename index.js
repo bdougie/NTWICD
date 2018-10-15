@@ -10,7 +10,8 @@ module.exports = app => {
     const {owner, repo} = context.repo()
 
 
-    if (description.includes('completed')) {
+console.log(context.payload)
+    if (description.includes('Deployment has completed')) {
       const branch = branches[0]
 
       return context.github.repos.createDeployment({
