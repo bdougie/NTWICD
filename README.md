@@ -1,4 +1,4 @@
-# loglify
+# Now That's What I Call a Deploy
 
 > A GitHub App built with [Probot](https://probot.github.io) that A Probot app
 

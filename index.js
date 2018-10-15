@@ -10,16 +10,16 @@ module.exports = app => {
     const {owner, repo} = context.repo()
 
 
-    if (description.includes('Deploy preview ready')) {
-      const branch = branches[0].name
+    if (description.includes('completed')) {
+      const branch = branches[0]
 
-      context.github.repos.createDeployment({
+      return context.github.repos.createDeployment({
         owner,
         repo,
         ref: sha,
-        payload: {target_url},
+        payload: {target_url, commit: branch.commit},
         description,
-        environment: branch,
+        environment: branch.name,
         required_contexts: []
       })
     }
@@ -30,7 +30,7 @@ module.exports = app => {
     const {target_url} = payload
     const {owner, repo} = context.repo()
 
-    context.github.repos.createDeploymentStatus({
+    return context.github.repos.createDeploymentStatus({
       owner, repo,
       deployment_id,
       state: "success",
